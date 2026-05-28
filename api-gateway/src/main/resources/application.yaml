@@ -13,12 +13,19 @@ spring:
               filters:
                 - StripPrefix=2
                 - name: LoggingOrdersFilter
+                - name: Authentication
+                  args:
+                    isEnabled: false
+#                - name: Authorization
+#                  args:
+#                    allowedRoles: ADMIN, SUPER_ADMIN
             - id: inventory-service
               uri: lb://INVENTORY-SERVICE
               predicates:
                 - Path=/api/v1/inventory/**
               filters:
                 - StripPrefix=2
+                - name: Authentication
 
 eureka:
   client:
@@ -28,3 +35,8 @@ eureka:
 logging:
   level:
     org.springframework.cloud.gateway: TRACE
+
+jwt:
+  secretKey: asdfkasdf89as7dfasd9fyuakjshdfa87sdf8iasuhfjas9d8f7as8idfuhjasd89f7asdi8fu
+
+
